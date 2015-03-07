@@ -1,0 +1,57 @@
+﻿@model Assignment.Areas.Admin.Models.GetPost
+
+@{
+    ViewBag.Title = "Post";
+    Layout = "~/Views/Shared/_Home.cshtml";
+}
+
+<h2>Post</h2>
+
+<fieldset>
+    <legend>GetPost</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Content)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Content)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Photo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Photo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Category)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Category)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OnDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OnDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ByUser)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ByUser)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Back Home", "Index")
+</p>

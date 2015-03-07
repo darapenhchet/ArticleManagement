@@ -1,0 +1,62 @@
+﻿@model ArticleManagement.Areas.Admin.Models.UsersModel
+@{
+    ViewBag.Title = "កែប្រែព័ត៌មានអ្នកប្រើប្រាស់";
+}
+
+<h2>កែប្រែព័ត៌មានអ្នកប្រើប្រាស់</h2>
+
+    <div class="form-group">
+        <label for="txtUsername">ឈ្មោះអ្នកប្រើប្រាស់</label>
+        <input type="text" class="form-control" id="txtUsername" placeholder="Enter username..." value="@Model.Username"/>
+    </div>
+    <div class="form-group">
+        <label for="txtLastname">នាមត្រកូល</label>
+        <input type="text" class="form-control" id="txtLastname" placeholder="Enter last name..." value="@Model.LastName"/>
+    </div>    
+    <div class="form-group">
+        <label for="txtFirstname">នាមខ្លួន</label>
+        <input type="text" class="form-control" id="txtFirstname" placeholder="Enter first name..." value="@Model.FirstName"/>
+    </div>
+    <div class="form-group">
+        <label for="txtEmail">Email</label>
+        <input type="text" class="form-control" id="txtEmail" placeholder="Enter email..." value="@Model.Email"/>
+    </div>
+    <div class="form-group">
+        <label for="txtAddress">អាសយដ្ឋាន</label>
+        <input type="text" class="form-control" id="txtAddress" placeholder="Enter address..." value="@Model.Address"/>
+    </div>
+    <button class="btn btn-default" id="Update">កែប្រែ</button>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("#Update").click(function () {
+                var JSONData = new Object();
+                JSONData.Id = "@Model.Id";
+                JSONData.Username = $("#txtUsername").val();
+                JSONData.Firstname = $("#txtFirstname").val();
+                JSONData.Lastname = $("#txtLastname").val();
+                JSONData.Email = $("#txtEmail").val();
+                JSONData.Address = $("#txtAddress").val();
+                
+                $.ajax({
+                    type: "POST",
+                    url: "/users/update",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(JSONData)
+                })
+                .success(function (responseData) {
+                    if (responseData.MESSAGE == "1") {
+                        alert("Your updating has been updated successfully...");
+                    } else {
+                        alert("Your updating has not been updated successfully...");
+                    }
+                })
+                .error(function (responseError) {
+                    alert("Your searching is error..."+ responseError.statusText);
+                });
+            });
+        });        
+    </script>
+}

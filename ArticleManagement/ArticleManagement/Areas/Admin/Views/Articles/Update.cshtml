@@ -1,0 +1,71 @@
+﻿@model ArticleManagement.Areas.Admin.Models.ArticleModel
+@{
+    ViewBag.Title = "កែប្រែអត្ថបទ";
+}
+
+<h2>កែប្រែអត្ថបទ</h2>
+
+    <div class="form-group">
+        <label for="txtTitle">Title</label>
+        <input type="text" class="form-control" id="txtTitle" placeholder="Enter title..." value="@Model.Title"/>
+    </div>
+    <div class="form-group">
+        <label for="txtContent">Content</label>
+        <textarea class="ckeditor form-control" id="txtContent" placeholder="Enter content..." rows="10">@Model.Content</textarea>
+    </div>
+    <div class="form-group">
+        <label for="cboCategory">Category</label>
+        <select class="form-control" id="cboCategory">
+        @foreach(var category in ViewData["Categories"] as IEnumerable<ArticleManagement.Areas.Admin.Models.CategoryModel>)
+        {
+            if(@category.Name==@Model.Category.Name){
+                <option selected="selected" value="@category.Id">@category.Name</option>        
+            }else{
+                <option value="@category.Id">@category.Name</option>        
+            }
+        }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="txtUser">User</label>
+        <input type="text" class="form-control" id="txtUser" placeholder="Enter user..." value="@Model.ByUser.LastName @Model.ByUser.FirstName"/>
+    </div>
+    <div class="form-group">
+        <label for="txtDate">Date</label>
+        <input type="text" class="form-control" id="txtDate" placeholder="Enter date..." value="@Model.OnDate"/>
+    </div>
+    <button type="submit" class="btn btn-default" id="btnUpdate">Update</button>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("#btnUpdate").click(function () {
+                var JSONData = new Object();
+                JSONData.Id = "@Model.Id";
+                JSONData.Title = $("#txtTitle").val();
+                JSONData.Content = $("#txtContent").val();
+                var Category = new Object();
+                Category.Id = $("#cboCategory").val();
+                JSONData.Category = Category;
+                $.ajax({
+                    type: "POST",
+                    url: "/articles/update",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(JSONData)
+                })
+                .success(function (responseData) {
+                    if (responseData.MESSAGE == "1") {
+                        alert("Your updating has been updated successfully...");
+                    } else {
+                        alert("Your updating has not been updated successfully...");
+                    }
+                })
+                .error(function (responseError) {
+                    alert("Your searching is error..."+ responseError.statusText);
+                });
+            });
+        });        
+    </script>
+}

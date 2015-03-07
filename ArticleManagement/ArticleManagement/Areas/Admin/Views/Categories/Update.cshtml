@@ -1,0 +1,46 @@
+﻿@model ArticleManagement.Areas.Admin.Models.CategoryModel
+@{
+    ViewBag.Title = "កែប្រែប្រភេទអត្ថបទ";
+}
+
+<h2>កែប្រែប្រភេទអត្ថបទ</h2>
+
+    <div class="form-group">
+        <label for="txtName">ឈ្មោះប្រភេទ</label>
+        <input type="text" class="form-control" id="txtName" placeholder="Enter category name..." value="@Model.Name" />
+    </div>
+    <div class="form-group">
+        <label for="txtDescription">បរិយាយ</label>
+        <textarea class="ckeditor form-control" id="txtDescription" placeholder="Enter description..." rows="3">@Model.Description</textarea>
+    </div>    
+    <button type="button" class="btn btn-default" id="btnUpdate">កែប្រែ</button>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("#btnUpdate").click(function () {
+                var JSONData = new Object();
+                JSONData.Id = "@Model.Id";
+                JSONData.Name = $("#txtName").val();
+                JSONData.Description = $("#txtDescription").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/categories/update",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(JSONData)
+                })
+                .success(function (responseData) {
+                    if (responseData.MESSAGE == "1") {
+                        alert("Your updating has been updated successfully...");
+                    } else {
+                        alert("Your updating has not been updated successfully...");
+                    }
+                })
+                .error(function (responseError) {
+                    alert("Your searching is error..."+ responseError.statusText);
+                });
+            });
+        });        
+    </script>
+}

@@ -1,0 +1,25 @@
+﻿@model ArticleManagement.Areas.Admin.Models.CategoryModel
+@{
+    ViewBag.Title = "ព័ត៌មានលំអិតប្រភេទអត្ថបទ";
+}
+
+<h2>ព័ត៌មានលំអិតប្រភេទអត្ថបទ</h2>
+
+<form action="update" method="post">
+    <div class="form-group">
+        <label for="txtName">Name</label>
+        <input type="text" class="form-control" id="txtName" placeholder="Enter category name..." value="@Model.Name"/>
+    </div>
+    <div class="form-group">
+        <label for="txtDescription">Description</label>
+        <textarea class="ckeditor form-control" id="txtDescription" placeholder="Enter description..." rows="3">@Model.Description</textarea>
+    </div>    
+    <div class="form-group">
+        <label for="txtUser">User</label>
+        <input type="text" class="form-control" id="txtUser" placeholder="Enter user..." value="@Model.ByUser.LastName @Model.ByUser.FirstName"/>
+    </div>    
+    <div class="form-group">
+        <label for="txtDate">Date</label>
+        <input type="text" class="form-control" id="txtDate" placeholder="Enter date..." value="@Model.Ondate"/>
+    </div>    
+</form>

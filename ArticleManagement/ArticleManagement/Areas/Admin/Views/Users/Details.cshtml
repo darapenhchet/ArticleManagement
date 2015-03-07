@@ -1,0 +1,26 @@
+﻿@model ArticleManagement.Areas.Admin.Models.UsersModel
+@{
+    ViewBag.Title = "ព័ត៌មានលំអិតអ្នកប្រើប្រាស់";
+}
+
+<h2>ព័ត៌មានលំអិតអ្នកប្រើប្រាស់</h2>
+
+<form action="create" method="post">
+    <div class="form-group">
+        <label for="txtUsername">ឈ្មោះអ្នកប្រើប្រាស់</label>
+        <input type="text" class="form-control" id="txtUsername" placeholder="Enter username..." value="@Model.Username"/>
+    </div>
+    <div class="form-group">
+        <label for="txtLastname">នាមត្រកូល</label>
+        <input type="text" class="ckeditor form-control" id="txtLastname" placeholder="Enter last name..." value="@Model.LastName"/>
+    </div>    
+    <div class="form-group">
+        <label for="txtFirstname">នាមខ្លួន</label>
+        <input type="text" class="form-control" id="txtFirstname" placeholder="Enter first name..." value="@Model.FirstName"/>
+    </div>
+    <div class="form-group">
+        <label for="txtLastname">Email</label>
+        <input type="text" class="form-control" id="txtEmail" placeholder="Enter email..." value="@Model.Email"/>
+    </div>
+    
+</form>

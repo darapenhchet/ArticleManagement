@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "បង្កើតអ្នកប្រើប្រាស់";
+}
+
+<h2>បង្កើតអ្នកប្រើប្រាស់ថ្មី</h2>
+
+    <div class="form-group ">
+        <label for="txtUsername">ឈ្មោះអ្នកប្រើប្រាស់</label>
+        <input type="text" class="form-control" id="txtUsername" placeholder="Enter username..." />
+    </div>
+    <div class="form-group">
+        <label for="txtpassword">លេខសំងាត់</label>
+        <input type="password" class="ckeditor form-control" id="txtPassword" placeholder="Enter password..." />
+    </div>
+    <div class="form-group">
+        <label for="txtConfirmPassword">ផ្ទៀងផ្ទាត់លេខសំងាត់</label>
+        <input type="password" class="form-control" id="txtConfirmPassword" placeholder="Enter confirm password..." />
+    </div>
+    <div class="form-group">
+        <label for="txtLastname">នាមត្រកូល</label>
+        <input type="text" class="form-control" id="txtLastname" placeholder="Enter last name..." />
+    </div>    
+    <div class="form-group">
+        <label for="txtFirstname">នាមខ្លួន</label>
+        <input type="text" class="form-control" id="txtFirstname" placeholder="Enter first name..." />
+    </div>
+    <div class="form-group">
+        <label for="txtEmail">Email</label>
+        <input type="email" class="form-control" id="txtEmail" placeholder="Enter email..." />
+    </div>
+    <div class="form-group">
+        <label for="txtAddress">អាសយដ្ឋាន</label>
+        <input type="text" class="form-control" id="txtAddress" placeholder="Enter address..." />
+    </div>
+    <button type="submit" class="btn btn-default" id="btnSubmit">បង្កើតថ្មី</button>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("#btnSubmit").click(function () {
+                var JSONData = new Object();
+                JSONData.Username = $("#txtUsername").val();
+                JSONData.Password = $("#txtPassword").val();
+                JSONData.Firstname = $("#txtFirstname").val();
+                JSONData.Lastname = $("#txtLastname").val();
+                JSONData.Email = $("#txtEmail").val();
+                JSONData.Address = $("#txtAddress").val();
+                var Category = new Object();
+                Category.Id = $("#cboCategory").val();
+                JSONData.Category = Category;
+                $.ajax({
+                    type: "POST",
+                    url: "/users/create",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(JSONData)
+                })
+                .success(function (responseData) {
+                    if (responseData.MESSAGE == "1") {
+                        alert("You have been inserted successfully...");
+                    } else {
+                        alert("Cannot insert...");
+                    }
+                })
+                .error(function (responseError) {
+                    alert("Your searching is error..."+ responseError.statusText);
+                });
+            });
+        });        
+    </script>
+}

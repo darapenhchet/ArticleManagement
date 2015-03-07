@@ -1,0 +1,137 @@
+﻿@model IEnumerable<ArticleManagement.Areas.Admin.Models.ArticleModel>
+@{
+    ViewBag.Title = "បញ្ជីព័ត៌មានអត្ថបទ";
+}
+    <!-- Header Section -->
+    <div id="header">
+        <h2>បញ្ជីព័ត៌មានអត្ថបទ</h2>
+    </div>
+    <!-- Filter Section -->
+    <label for="txtSearch">ស្វែងរក: </label>
+    <input type="text" id="txtSearch" class="form-control"/>
+    <div class="col-lg-2">
+        <a href="/admin/articles/create" id="btnCreate" class="btn btn-primary form-control" style="margin:5px 0px;">បន្ថែមថ្មី</a>
+    </div>
+    <!-- Content Section -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th style="width:10%">លេខសំគាល់</th>
+                <th style="width:20%">ចំណងជើង</th>
+                <th style="width:20%">ខ្លឹមសារ</th>
+                <th style="width:10%">ប្រភេទ</th>
+                <th style="width:10%">អ្នកសរសេរ</th>   
+                <th style="width:10%">បង្កើតនៅ</th>
+                <th style="width:20%"></th>
+            </tr>            
+        </thead>
+        <tbody id="TABLE_BODY">
+            @foreach(var item in Model)
+            {
+            <tr id="@item.Id">
+                <td>@Html.DisplayFor(model=>item.Id)</td>
+                <td>@Html.DisplayFor(model=>item.Title)</td>
+                <td>@Html.DisplayTextFor(model=>item.SubString)</td>
+                <td>@Html.DisplayFor(model=>item.Category.Name)</td>
+                <td>@Html.DisplayFor(model=>item.ByUser.LastName) @Html.DisplayFor(model=>item.ByUser.FirstName)</td>
+                <td>@Html.DisplayFor(model=>item.OnDate)</td>
+                <td>                
+                    @Html.ActionLink("កែប្រែ", "update", new{id=item.Id},new { @class = "btn btn-primary" })
+                    <a id='btnDelete' class='btn btn-primary'>លុប</a>
+                    @Html.ActionLink("លំអិត", "details", new{id=item.Id},new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+            }   
+        </tbody>
+    </table>
+@*
+    <!--Pagination Section-->
+    <nav>
+        <ul class="pagination">
+            <li class="disabled">
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">រំកិលថយក្រោយ</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="#">១
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">២
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">៣ 
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">៤ 
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">រំកិលទៅមុខ</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+*@
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("#txtSearch").keyup(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "articles/search",
+                    data: { "Search": $("#txtSearch").val() },
+                })
+                .success(function (responseData) {
+                    console.log(responseData);
+                    var rows = "";
+                    for (var i = 0; i < responseData.ARTICLES.length; i++) {
+                        rows += "<tr id=" + responseData.ARTICLES[i].Id + ">" +
+                                  "<td>" + responseData.ARTICLES[i].Id + "</td>" +
+                                  "<td>" + responseData.ARTICLES[i].Title + "</td>" +
+                                  "<td>" + responseData.ARTICLES[i].SubString + "</td>" +
+                                  "<td>" + responseData.ARTICLES[i].Category.Name + "</td>" +
+                                  "<td>" + responseData.ARTICLES[i].ByUser.LastName +" "+ responseData.ARTICLES[i].ByUser.FirstName+ "</td>" +
+                                  "<td>" + responseData.ARTICLES[i].OnDate + "</td>" +
+                                  "<td><a id='btnUpdate' class='btn btn-primary' href='articles/update/" + responseData.ARTICLES[i].Id + "'>កែប្រែ</a>" +
+                                  "    <a id='btnDelete' class='btn btn-primary'>លុប</a>" +
+                                  "    <a id='btnDetails' class='btn btn-primary' href='articles/details/" + responseData.ARTICLES[i].Id + "'>លំអិត</a>" +
+                                  "</td>" +
+                                  "</tr>";
+                    }
+                    if (rows != "" || rows != null) {
+                        $("#TABLE_BODY").html(rows);
+                    }
+                })
+                .error(function (responseError) {
+                    alert("Your searching is error..." + responseError.statusText);
+                });
+            });
+
+            $(document).on("click", "#btnDelete", function () {
+                var id = $(this).parent("td").parent("tr").attr("id");
+                $.ajax({
+                    type: "POST",
+                    url: "articles/delete/" + id,
+
+                })
+                .success(function (responseData) {
+                    if (responseData.MESSAGE == "1") {
+                        $("tr#"+id).remove();
+                        alert("You have been deleted!!!");
+                    } else {
+                        alert("Cannot delete!!!");
+                    }
+                });
+            });
+        });
+    </script>
+}
