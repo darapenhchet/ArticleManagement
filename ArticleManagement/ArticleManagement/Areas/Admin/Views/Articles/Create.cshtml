@@ -6,15 +6,15 @@
 
 
     <div class="form-group">
-        <label for="txtTitle">Title</label>
+        <label for="txtTitle">ចំណងជើង</label>
         <input type="text" class="form-control" id="txtTitle" placeholder="Enter title..." />
     </div>
     <div class="form-group">
-        <label for="txtContent">Content</label>
+        <label for="txtContent">ខ្លឹមសារ</label>
         <textarea id="txtContent" class="ckeditor form-control"></textarea>
     </div>
     <div class="form-group">
-        <label for="cboCategory">Category</label>
+        <label for="cboCategory">ប្រភេទ</label>
         <select class="form-control" id="cboCategory">
              @foreach (var category in ViewData["Categories"] as IEnumerable<ArticleManagement.Areas.Admin.Models.CategoryModel>)
                 {
@@ -22,7 +22,7 @@
                 }
         </select>
     </div>
-    <button type="submit" class="btn btn-default" id="btnSubmit">Submit</button>
+    <button type="submit" class="btn btn-primary" id="btnSubmit">បង្កើតថ្មី</button>
 
 @section Scripts{
     <script type="text/javascript">
@@ -32,7 +32,6 @@
                 var JSONData = new Object();
                 JSONData.Title = $("#txtTitle").val();
                 JSONData.Content = $("textarea.ckeditor").val();
-                alert($("textarea.ckeditor").val());
                 var Category = new Object();
                 Category.Id = $("#cboCategory").val();
                 JSONData.Category = Category;

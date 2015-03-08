@@ -14,6 +14,13 @@ namespace Assignment.Areas.Admin.Models
         public int Category { get; set; }
         public System.DateTime OnDate { get; set; }
         public int ByUser { get; set; }
+        public String SubString
+        {
+            get
+            {
+                return (Content.Length > 205) ? Content.Substring(0, 200) + "  ..." : Content;
+            }
+        }
     }
     
     public class SetPost

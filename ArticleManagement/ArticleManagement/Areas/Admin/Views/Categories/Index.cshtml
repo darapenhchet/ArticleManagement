@@ -28,7 +28,7 @@
             <tr id="@item.Id">
                 <td>@Html.DisplayFor(model=>item.Id)</td>
                 <td>@Html.DisplayFor(model=>item.Name)</td>
-                <td>@Html.DisplayFor(model=>item.Description)</td>
+                <td>@Html.DisplayTextFor(model=>item.Description)</td>
                 <td>@Html.DisplayFor(model=>item.ByUser.LastName) @Html.DisplayFor(model=>item.ByUser.FirstName)</td>
                 <td>@Html.DisplayFor(model=>item.Ondate)</td>
                 <td>

@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: #ecf0f1;
+    background-color: white;
     font-family: 'Khmer Kampongtrach';
     font-size: 14px;
     color: black;
@@ -60,5 +60,9 @@ table {
 
 .col-lg-2 {
     padding-left:0px;
+}
+
+btn-primary {
+    background-color: black;
 }
 

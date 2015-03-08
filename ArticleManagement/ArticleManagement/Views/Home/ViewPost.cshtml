@@ -1,57 +1,58 @@
 ﻿@model Assignment.Areas.Admin.Models.GetPost
 
 @{
-    ViewBag.Title = "Post";
+    ViewBag.Title = "អត្ថបទ " + @Model.Title;
     Layout = "~/Views/Shared/_Home.cshtml";
 }
-
-<h2>Post</h2>
+<div class="container">
+<h2>អត្ថបទ</h2>
 
 <fieldset>
-    <legend>GetPost</legend>
+    <legend></legend>   
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Title)
+         <h2 style="text-align:center;">ចំណងជើង: @Html.DisplayFor(model => model.Title)</h2>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Title)
-    </div>
+    <span class="display-field">
+        
+    </span>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Content)
+         <h4>ខ្លឺមសារ</h4>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Content)
+    <div class="display-field" style="text-align:justify;">
+        @Html.DisplayTextFor(model => model.Content)
     </div>
-
+    @*
     <div class="display-label">
          @Html.DisplayNameFor(model => model.Photo)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Photo)
     </div>
-
+    *@
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Category)
+         <h5>ប្រភេទអត្ថបទៈ @Html.DisplayFor(model => model.Category)</h5>
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Category)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.OnDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.OnDate)
+        
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.ByUser)
+         <h5>ផ្សាយនៅថ្ងៃទី : @Html.DisplayFor(model => model.OnDate)</h5>
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.ByUser)
+        
+    </div>
+
+    <div class="display-label">
+        <h5>អ្នកផ្សាយ : @Html.DisplayFor(model => model.ByUser)</h5>
+    </div>
+    <div class="display-field">
+        
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Back Home", "Index")
+    @Html.ActionLink("<< ត្រឡប់ទៅកាន់ទំព័រដើមវិញ", "Index")
 </p>
+</div>
