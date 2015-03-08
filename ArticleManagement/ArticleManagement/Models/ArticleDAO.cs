@@ -19,7 +19,11 @@ namespace Assignment.Areas.Admin.Models
         }
 
         public static GetPost Detail(int id) {
-            string sql = @"SELECT * FROM [dbo].[Articles] WHERE Id = @p1";
+            string sql = @"SELECT Articles.ID, Title, Content, Category, Articles.ByUser, Name, Articles.OnDate, Firstname, Lastname, Photo 
+                           FROM [dbo].[Articles] 
+                           INNER JOIN Users ON Users.Id = Articles.ByUser 
+                           INNER JOIN Categories ON Categories.Id = Articles.Category
+                           WHERE Articles.Id = @p1";
             DataSet ds = DB.Query(sql, id);
             return DB.GetPostDS(ds);
         }
@@ -47,7 +51,10 @@ namespace Assignment.Areas.Admin.Models
 
         public static List<GetPost> List()
         {
-            string sql = @"SELECT * FROM [dbo].[Articles]";
+            string sql = @"SELECT Articles.ID, Title, Content, Category, Articles.ByUser, Name, Articles.OnDate, Firstname, Lastname, Photo 
+                           FROM [dbo].[Articles] 
+                           INNER JOIN Users ON Users.Id = Articles.ByUser 
+                           INNER JOIN Categories ON Categories.Id = Articles.Category";
             DataSet ds = DB.Query(sql);
             return DB.GetAllPostDS(ds);
         }

@@ -32,7 +32,7 @@
     </div>
     *@
     <div class="display-label">
-         <h5>ប្រភេទអត្ថបទៈ @Html.DisplayFor(model => model.Category)</h5>
+         <h5>ប្រភេទអត្ថបទៈ @Html.DisplayFor(model => model.Category.Name)</h5>
     </div>
     <div class="display-field">
         
@@ -46,7 +46,7 @@
     </div>
 
     <div class="display-label">
-        <h5>អ្នកផ្សាយ : @Html.DisplayFor(model => model.ByUser)</h5>
+        <h5>អ្នកផ្សាយ : @Html.DisplayFor(model => model.ByUser.Lastname) @Html.DisplayFor(model => model.ByUser.Firstname)</h5>
     </div>
     <div class="display-field">
         

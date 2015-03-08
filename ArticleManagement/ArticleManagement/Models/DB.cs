@@ -133,9 +133,16 @@ namespace Assignment.Areas.Admin.Models
                 post.Title = ds.Tables[0].Rows[0]["Title"].ToString();
                 post.Content = ds.Tables[0].Rows[0]["Content"].ToString();
                 post.Photo = ds.Tables[0].Rows[0]["Photo"].ToString();
-                post.Category = (int)ds.Tables[0].Rows[0]["Category"];
+                GetCategory category = new GetCategory();
+                category.Id = (int)ds.Tables[0].Rows[0]["Category"];
+                category.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                post.Category = category;
                 post.OnDate = (System.DateTime)ds.Tables[0].Rows[0]["OnDate"];
-                post.ByUser = (int)ds.Tables[0].Rows[0]["ByUser"];
+                GetUser user = new GetUser();
+                user.Id = (int)ds.Tables[0].Rows[0]["ByUser"];
+                user.Firstname = ds.Tables[0].Rows[0]["Firstname"].ToString();
+                user.Lastname = ds.Tables[0].Rows[0]["Lastname"].ToString();
+                post.ByUser = user;
                 return post;
             }
             catch (Exception ex)
@@ -156,10 +163,15 @@ namespace Assignment.Areas.Admin.Models
                 post.Title = ds.Tables[0].Rows[i]["Title"].ToString();
                 post.Content = ds.Tables[0].Rows[i]["Content"].ToString();
                 post.Photo = ds.Tables[0].Rows[i]["Photo"].ToString();
-                post.Category = (int)ds.Tables[0].Rows[i]["Category"];
-                post.OnDate = (System.DateTime)ds.Tables[0].Rows[i]["OnDate"];
-                post.ByUser = (int)ds.Tables[0].Rows[i]["ByUser"];
-                list.Add(post);
+                GetCategory category = new GetCategory();
+                category.Id = (int)ds.Tables[0].Rows[0]["Category"];
+                category.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                post.Category = category;
+                post.OnDate = (System.DateTime)ds.Tables[0].Rows[0]["OnDate"];
+                GetUser user = new GetUser();
+                user.Id = (int)ds.Tables[0].Rows[0]["ByUser"];
+                user.Firstname = ds.Tables[0].Rows[0]["Firstname"].ToString();
+                user.Lastname = ds.Tables[0].Rows[0]["Lastname"].ToString(); list.Add(post);
             }
             return list;
         }

@@ -113,6 +113,10 @@ namespace ArticleManagement.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Login()
         {
+            if (checkSession())
+            {
+                return RedirectToAction("index","articles");
+            }
             return View();
         }
 

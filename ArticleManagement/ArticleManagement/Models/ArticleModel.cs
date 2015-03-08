@@ -11,9 +11,9 @@ namespace Assignment.Areas.Admin.Models
         public string Title { get; set; }
         public string Content { get; set; }
         public string Photo { get; set; }
-        public int Category { get; set; }
+        public GetCategory Category { get; set; }
         public System.DateTime OnDate { get; set; }
-        public int ByUser { get; set; }
+        public GetUser ByUser { get; set; }
         public String SubString
         {
             get
